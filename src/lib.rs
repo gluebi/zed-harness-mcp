@@ -1,4 +1,3 @@
-use std::fs;
 use std::env;
 use zed_extension_api::{
     self as zed, Command, ContextServerConfiguration, ContextServerId, Project, Result,
@@ -11,39 +10,20 @@ const RELEASE_BASE_URL: &str = "https://github.com/myposter-de/mcp/releases/down
 struct HarnessMcpServer;
 
 fn get_asset_name() -> String {
-    let os = match std::env::consts::OS {
+    let os = std::env::consts::OS;
+    let arch = std::env::consts::ARCH;
+    
+    let os_name = match os {
         "macos" => "darwin",
-        "linux" => "linux",
-        "windows" => "windows",
-        os => os,
+        _ => os,
     };
-    let arch = match std::env::consts::ARCH {
+    let arch_name = match arch {
         "x86_64" => "amd64",
         "aarch64" => "arm64",
-        arch => arch,
+        _ => arch,
     };
     let ext = if os == "windows" { "zip" } else { "tar.gz" };
-    format!("{}_{}_{}_{}.{}", BINARY_NAME, VERSION, os, arch, ext)
-}
-
-fn read_env_file() -> Vec<(String, String)> {
-    let mut env_vars = Vec::new();
-    
-    if let Ok(content) = fs::read_to_string(".env") {
-        for line in content.lines() {
-            let line = line.trim();
-            if line.is_empty() || line.starts_with('#') {
-                continue;
-            }
-            if let Some((key, value)) = line.split_once('=') {
-                let key = key.trim().to_string();
-                let value = value.trim().trim_matches('"').trim_matches(''').to_string();
-                env_vars.push((key, value));
-            }
-        }
-    }
-    
-    env_vars
+    format!("{}_{}_{}_{}.{}", BINARY_NAME, VERSION, os_name, arch_name, ext)
 }
 
 impl zed::Extension for HarnessMcpServer {
@@ -58,26 +38,25 @@ impl zed::Extension for HarnessMcpServer {
     ) -> Result<Command> {
         let asset_name = get_asset_name();
         let download_url = format!("{}/{}", RELEASE_BASE_URL, asset_name);
-        
-        let binary_path = format!("{}", BINARY_NAME);
-        
-        if !std::path::Path::new(&binary_path).exists() {
-            zed::download_file(
-                &download_url,
-                &asset_name,
-                zed::DownloadedFileType::GzipTar,
-            )?;
-        }
-        
-        let env_vars = read_env_file();
-        
-        let current_dir = env::current_dir().unwrap();
-        let full_binary_path = current_dir.join(BINARY_NAME).to_string_lossy().to_string();
-        
+
+        // Download and extract if binary doesn't exist
+        // download_file extracts to the extension's working directory
+        zed::download_file(
+            &download_url,
+            &asset_name,
+            zed::DownloadedFileType::GzipTar,
+        ).ok(); // Ignore error if already downloaded
+
+        let binary_path = env::current_dir()
+            .unwrap()
+            .join(BINARY_NAME)
+            .to_string_lossy()
+            .to_string();
+
         Ok(Command {
-            command: full_binary_path,
+            command: binary_path,
             args: vec!["stdio".to_string(), "--toolsets=fme".to_string()],
-            env: env_vars,
+            env: vec![],
         })
     }
 
@@ -98,8 +77,8 @@ This extension connects Zed to Harness MCP Server for Feature Management and Exp
 
 ## Setup
 
-1. Create a .env file in your project root with your API key:
-   HARNESS_API_KEY=your-split-admin-api-key
+1. Set the HARNESS_API_KEY environment variable before starting Zed:
+   export HARNESS_API_KEY=your-split-admin-api-key
 
 2. Enable the context server in Zed Agent Panel settings
 
@@ -123,7 +102,7 @@ This extension connects Zed to Harness MCP Server for Feature Management and Exp
 ## Troubleshooting
 
 If tools do not appear:
-1. Check that your .env file contains a valid HARNESS_API_KEY
+1. Check that HARNESS_API_KEY environment variable is set
 2. Restart Zed
 3. Re-enable the context server
 "#.to_string(),
