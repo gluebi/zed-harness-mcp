@@ -1,10 +1,12 @@
 use std::env;
+use std::fs;
 use zed_extension_api::{
     self as zed, Command, ContextServerConfiguration, ContextServerId, Project, Result,
     settings::ContextServerSettings,
 };
 
 const BINARY_NAME: &str = "harness-mcp-server";
+const DOWNLOAD_URL: &str = "https://github.com/gluebi/zed-harness-mcp/releases/download/v1.0.0/harness-mcp-server";
 
 struct HarnessMcpServer;
 
@@ -18,12 +20,23 @@ impl zed::Extension for HarnessMcpServer {
         context_server_id: &ContextServerId,
         project: &Project,
     ) -> Result<Command> {
-        // Use bundled binary
         let binary_path = env::current_dir()
-            .unwrap()
+            .map_err(|e| format!("Failed to get current dir: {}", e))?
             .join(BINARY_NAME)
             .to_string_lossy()
             .to_string();
+
+        // Download binary if it doesn't exist
+        if !fs::metadata(&binary_path).is_ok() {
+            zed::download_file(
+                DOWNLOAD_URL,
+                BINARY_NAME,
+                zed::DownloadedFileType::Uncompressed,
+            ).map_err(|e| format!("Failed to download binary: {}", e))?;
+            
+            zed::make_file_executable(&binary_path)
+                .map_err(|e| format!("Failed to make binary executable: {}", e))?;
+        }
 
         // Get user settings
         let settings = ContextServerSettings::for_project(context_server_id.as_ref(), project)?;
@@ -56,7 +69,7 @@ impl zed::Extension for HarnessMcpServer {
             "properties": {
                 "api_key": {
                     "type": "string",
-                    "description": "Your Split.io Admin API Key"
+                    "description": "Your Harness Personal Access Token (PAT)"
                 }
             },
             "required": ["api_key"]
@@ -73,8 +86,8 @@ This extension connects Zed to Harness MCP Server for Feature Management and Exp
 
 ## Requirements
 
-- A Harness/Split.io account
-- Split.io Admin API Key
+- A Harness account
+- Harness Personal Access Token (PAT)
 
 ## Setup
 
@@ -83,7 +96,7 @@ This extension connects Zed to Harness MCP Server for Feature Management and Exp
      "context_servers": {
        "harness-mcp-server": {
          "settings": {
-           "api_key": "your-split-io-admin-api-key"
+           "api_key": "pat.xxxxx.xxxxx.xxxxx"
          }
        }
      }
@@ -93,9 +106,9 @@ This extension connects Zed to Harness MCP Server for Feature Management and Exp
 
 ## Getting Your API Key
 
-1. Log in to Split.io (https://app.split.io)
-2. Go to Admin Settings -> API Keys
-3. Create or copy an Admin API Key
+1. Log in to Harness (https://app.harness.io)
+2. Go to Account Settings -> Access Tokens
+3. Create a Personal Access Token
 
 ## Available Tools
 

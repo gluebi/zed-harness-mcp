@@ -1,0 +1,56 @@
+time=2026-02-03T10:35:10.617+01:00 level=INFO msg="Starting server" url=https://app.harness.io
+time=2026-02-03T10:35:10.618+01:00 level=INFO msg="Tool enabled" toolset=fme tool=list_fme_workspaces
+time=2026-02-03T10:35:10.618+01:00 level=INFO msg="Tool enabled" toolset=fme tool=list_fme_environments
+time=2026-02-03T10:35:10.618+01:00 level=INFO msg="Tool enabled" toolset=fme tool=list_fme_feature_flags
+time=2026-02-03T10:35:10.618+01:00 level=INFO msg="Tool enabled" toolset=fme tool=get_fme_feature_flag_definition
+time=2026-02-03T10:35:10.618+01:00 level=INFO msg="Tool enabled" toolset=fme tool=get_fme_rollout_statuses
+time=2026-02-03T10:35:10.618+01:00 level=INFO msg="Tool enabled" toolset=fme tool=create_fme_feature_flag
+time=2026-02-03T10:35:10.618+01:00 level=INFO msg="Tool enabled" toolset=fme tool=create_fme_feature_flag_definition
+time=2026-02-03T10:35:10.618+01:00 level=INFO msg="Tool enabled" toolset=fme tool=update_fme_feature_flag
+time=2026-02-03T10:35:10.618+01:00 level=INFO msg="Registered toolsets with tracker" count=1
+time=2026-02-03T10:35:10.618+01:00 level=INFO msg="Harness MCP Server running on stdio" version=0.1.0
+time=2026-02-03T10:35:16.452+01:00 level=INFO msg="Starting server" url=https://app.harness.io
+time=2026-02-03T10:35:16.452+01:00 level=INFO msg="Tool enabled" toolset=fme tool=list_fme_workspaces
+time=2026-02-03T10:35:16.452+01:00 level=INFO msg="Tool enabled" toolset=fme tool=list_fme_environments
+time=2026-02-03T10:35:16.452+01:00 level=INFO msg="Tool enabled" toolset=fme tool=list_fme_feature_flags
+time=2026-02-03T10:35:16.452+01:00 level=INFO msg="Tool enabled" toolset=fme tool=get_fme_feature_flag_definition
+time=2026-02-03T10:35:16.452+01:00 level=INFO msg="Tool enabled" toolset=fme tool=get_fme_rollout_statuses
+time=2026-02-03T10:35:16.452+01:00 level=INFO msg="Tool enabled" toolset=fme tool=create_fme_feature_flag
+time=2026-02-03T10:35:16.452+01:00 level=INFO msg="Tool enabled" toolset=fme tool=create_fme_feature_flag_definition
+time=2026-02-03T10:35:16.452+01:00 level=INFO msg="Tool enabled" toolset=fme tool=update_fme_feature_flag
+time=2026-02-03T10:35:16.452+01:00 level=INFO msg="Registered toolsets with tracker" count=1
+time=2026-02-03T10:35:16.452+01:00 level=INFO msg="Harness MCP Server running on stdio" version=0.1.0
+time=2026-02-03T10:35:21.088+01:00 level=INFO msg="Starting server" url=https://app.harness.io
+time=2026-02-03T10:35:21.088+01:00 level=INFO msg="Tool enabled" toolset=fme tool=list_fme_workspaces
+time=2026-02-03T10:35:21.088+01:00 level=INFO msg="Tool enabled" toolset=fme tool=list_fme_environments
+time=2026-02-03T10:35:21.088+01:00 level=INFO msg="Tool enabled" toolset=fme tool=list_fme_feature_flags
+time=2026-02-03T10:35:21.088+01:00 level=INFO msg="Tool enabled" toolset=fme tool=get_fme_feature_flag_definition
+time=2026-02-03T10:35:21.088+01:00 level=INFO msg="Tool enabled" toolset=fme tool=get_fme_rollout_statuses
+time=2026-02-03T10:35:21.088+01:00 level=INFO msg="Tool enabled" toolset=fme tool=create_fme_feature_flag
+time=2026-02-03T10:35:21.088+01:00 level=INFO msg="Tool enabled" toolset=fme tool=create_fme_feature_flag_definition
+time=2026-02-03T10:35:21.088+01:00 level=INFO msg="Tool enabled" toolset=fme tool=update_fme_feature_flag
+time=2026-02-03T10:35:21.088+01:00 level=INFO msg="Registered toolsets with tracker" count=1
+time=2026-02-03T10:35:21.088+01:00 level=INFO msg="Harness MCP Server running on stdio" version=0.1.0
+time=2026-02-03T10:35:21.088+01:00 level=INFO msg="Client connected" name=test version=1.0
+time=2026-02-03T10:36:17.427+01:00 level=INFO msg="Starting server" url=https://app.harness.io
+time=2026-02-03T10:36:17.427+01:00 level=INFO msg="Tool enabled" toolset=fme tool=list_fme_workspaces
+time=2026-02-03T10:36:17.427+01:00 level=INFO msg="Tool enabled" toolset=fme tool=list_fme_environments
+time=2026-02-03T10:36:17.427+01:00 level=INFO msg="Tool enabled" toolset=fme tool=list_fme_feature_flags
+time=2026-02-03T10:36:17.427+01:00 level=INFO msg="Tool enabled" toolset=fme tool=get_fme_feature_flag_definition
+time=2026-02-03T10:36:17.427+01:00 level=INFO msg="Tool enabled" toolset=fme tool=get_fme_rollout_statuses
+time=2026-02-03T10:36:17.427+01:00 level=INFO msg="Tool enabled" toolset=fme tool=create_fme_feature_flag
+time=2026-02-03T10:36:17.427+01:00 level=INFO msg="Tool enabled" toolset=fme tool=create_fme_feature_flag_definition
+time=2026-02-03T10:36:17.427+01:00 level=INFO msg="Tool enabled" toolset=fme tool=update_fme_feature_flag
+time=2026-02-03T10:36:17.427+01:00 level=INFO msg="Registered toolsets with tracker" count=1
+time=2026-02-03T10:36:17.427+01:00 level=INFO msg="Harness MCP Server running on stdio" version=0.1.0
+time=2026-02-03T10:36:23.349+01:00 level=INFO msg="Starting server" url=https://app.harness.io
+time=2026-02-03T10:36:23.349+01:00 level=INFO msg="Tool enabled" toolset=fme tool=list_fme_workspaces
+time=2026-02-03T10:36:23.349+01:00 level=INFO msg="Tool enabled" toolset=fme tool=list_fme_environments
+time=2026-02-03T10:36:23.349+01:00 level=INFO msg="Tool enabled" toolset=fme tool=list_fme_feature_flags
+time=2026-02-03T10:36:23.349+01:00 level=INFO msg="Tool enabled" toolset=fme tool=get_fme_feature_flag_definition
+time=2026-02-03T10:36:23.349+01:00 level=INFO msg="Tool enabled" toolset=fme tool=get_fme_rollout_statuses
+time=2026-02-03T10:36:23.349+01:00 level=INFO msg="Tool enabled" toolset=fme tool=create_fme_feature_flag
+time=2026-02-03T10:36:23.349+01:00 level=INFO msg="Tool enabled" toolset=fme tool=create_fme_feature_flag_definition
+time=2026-02-03T10:36:23.349+01:00 level=INFO msg="Tool enabled" toolset=fme tool=update_fme_feature_flag
+time=2026-02-03T10:36:23.349+01:00 level=INFO msg="Registered toolsets with tracker" count=1
+time=2026-02-03T10:36:23.349+01:00 level=INFO msg="Harness MCP Server running on stdio" version=0.1.0
