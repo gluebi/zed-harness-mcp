@@ -4,28 +4,9 @@ use zed_extension_api::{
     settings::ContextServerSettings,
 };
 
-const VERSION: &str = "1.0.0";
 const BINARY_NAME: &str = "harness-mcp-server";
-const RELEASE_BASE_URL: &str = "https://github.com/myposter-de/mcp/releases/download/v1.0.0";
 
 struct HarnessMcpServer;
-
-fn get_asset_name() -> String {
-    let os = std::env::consts::OS;
-    let arch = std::env::consts::ARCH;
-    
-    let os_name = match os {
-        "macos" => "darwin",
-        _ => os,
-    };
-    let arch_name = match arch {
-        "x86_64" => "amd64",
-        "aarch64" => "arm64",
-        _ => arch,
-    };
-    let ext = if os == "windows" { "zip" } else { "tar.gz" };
-    format!("{}_{}_{}_{}.{}", BINARY_NAME, VERSION, os_name, arch_name, ext)
-}
 
 impl zed::Extension for HarnessMcpServer {
     fn new() -> Self {
@@ -37,16 +18,7 @@ impl zed::Extension for HarnessMcpServer {
         context_server_id: &ContextServerId,
         project: &Project,
     ) -> Result<Command> {
-        let asset_name = get_asset_name();
-        let download_url = format!("{}/{}", RELEASE_BASE_URL, asset_name);
-
-        // Download and extract if binary doesn't exist
-        zed::download_file(
-            &download_url,
-            &asset_name,
-            zed::DownloadedFileType::GzipTar,
-        ).ok();
-
+        // Use bundled binary
         let binary_path = env::current_dir()
             .unwrap()
             .join(BINARY_NAME)
@@ -55,7 +27,7 @@ impl zed::Extension for HarnessMcpServer {
 
         // Get user settings
         let settings = ContextServerSettings::for_project(context_server_id.as_ref(), project)?;
-        
+
         // Extract API key from settings
         let mut env_vars: Vec<(String, String)> = vec![];
         if let Some(settings_value) = settings.settings {
@@ -104,12 +76,17 @@ This extension connects Zed to Harness MCP Server for Feature Management and Exp
 ## Setup
 
 1. Add your API key to Zed settings (Settings > Open Settings):
-
-
+   {
+     "context_servers": {
+       "harness-mcp-server": {
+         "settings": {
+           "api_key": "your-split-io-admin-api-key"
+         }
+       }
+     }
+   }
 
 2. Enable the context server in Zed Agent Panel settings
-
-3. The extension will automatically download the Harness MCP binary on first use
 
 ## Getting Your API Key
 
