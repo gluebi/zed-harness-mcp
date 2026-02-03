@@ -28,18 +28,21 @@ impl zed::Extension for HarnessMcpServer {
         // Get user settings
         let settings = ContextServerSettings::for_project(context_server_id.as_ref(), project)?;
 
-        // Extract API key from settings
-        let mut env_vars: Vec<(String, String)> = vec![];
+        // Build args with API key from settings
+        let mut args = vec!["stdio".to_string(), "--toolsets=fme".to_string()];
+        
         if let Some(settings_value) = settings.settings {
             if let Some(api_key) = settings_value.get("api_key").and_then(|v| v.as_str()) {
-                env_vars.push(("HARNESS_API_KEY".to_string(), api_key.to_string()));
+                if !api_key.is_empty() {
+                    args.push(format!("--api-key={}", api_key));
+                }
             }
         }
 
         Ok(Command {
             command: binary_path,
-            args: vec!["stdio".to_string(), "--toolsets=fme".to_string()],
-            env: env_vars,
+            args,
+            env: vec![],
         })
     }
 
