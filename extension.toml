@@ -1,0 +1,10 @@
+id = "harness-mcp-server"
+name = "Harness MCP Server"
+version = "0.1.0"
+schema_version = 1
+authors = ["Oliver Pietsch <oliver.pietsch@myposter.de>"]
+description = "Connect to Harness MCP Server for Feature Management (Split.io) integration"
+repository = "https://github.com/gluebi/zed-harness-mcp"
+
+[context_servers.harness-mcp-server]
+name = "Harness MCP Server"
